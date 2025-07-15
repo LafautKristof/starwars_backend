@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('specie', function (Blueprint $table) {
             $table->string("_id")->primary();
             $table->string("name");
-            $table->string("description");
+            $table->longText("description");
             $table->string("image");
             $table->timestamps();
         });
