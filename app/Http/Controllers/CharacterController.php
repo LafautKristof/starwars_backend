@@ -10,7 +10,7 @@ class CharacterController extends Controller
 {
     public function index()
     {
-        return $characters = Character::all();
+        return response()->json(Character::all(), 200);
     }
     public function store(Request $request)
     {
@@ -25,5 +25,17 @@ class CharacterController extends Controller
         $character = \App\Models\Character::create($validated);
 
         return response()->json($character, 201);
+    }
+
+    public function show($id)
+    {
+        Log::info("Fetching character with ID: " . $id);
+        $character = Character::where('_id', $id)->first();
+
+        if (!$character) {
+            return response()->json(['error' => 'Character not found'], 404);
+        }
+
+        return response()->json($character);
     }
 }

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Specie;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class SpecieController extends Controller
+class VehicleController extends Controller
 {
     public function index()
     {
-        return response()->json(Specie::all(), 200);
+        return response()->json(Vehicle::all(), 200);
     }
     public function store(Request $request)
     {
@@ -22,19 +22,19 @@ class SpecieController extends Controller
             'image' => 'required|string',
         ]);
 
-        $specie = \App\Models\Specie::create($validated);
+        $vehicle = \App\Models\Vehicle::create($validated);
 
-        return response()->json($specie, 201);
+        return response()->json($vehicle, 201);
     }
     public function show($id)
     {
         Log::info("Fetching character with ID: " . $id);
-        $specie = Specie::where('_id', $id)->first();
+        $vehicle = Vehicle::where('_id', $id)->first();
 
-        if (!$specie) {
+        if (!$vehicle) {
             return response()->json(['error' => 'Character not found'], 404);
         }
 
-        return response()->json($specie);
+        return response()->json($vehicle);
     }
 }
